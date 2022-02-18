@@ -4,16 +4,17 @@ function getItems(value) {
 let timer;
 let counter = 0;
 function throtling(callback, delay) {
-  const context = this;
-  const value = arguments;
+  let flag = true;
   return function () {
-    if (timer !== undefined || counter === 0) {
-      counter++;
-      timer = setTimeout(() => {
-        if (timer) clearTimeout(timer);
-        callback.apply(context, arguments);
-      }, delay);
+    const context = this;
+    const value = arguments;
+    if (flag) {
+      flag = false;
+      getItems.apply(context, arguments);
     }
+    setTimeout(() => {
+      flag = true;
+    }, delay);
   };
 }
 
