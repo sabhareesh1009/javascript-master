@@ -40,9 +40,32 @@ Function.prototype.newBind = function (...args) {
   let printTransDetailsObj = this;
   params = args.slice(1);
   return function (...arg2) {
-    printTransDetailsObj.call(args[0], [...params, ...arg2]);
+    printTransDetailsObj.apply(args[0], [...params, ...arg2]);
   };
 };
 
 const polyfillBindTransc = printTransDetails.newBind(transaction, "debit card");
 polyfillBindTransc("sucess");
+
+
+
+Function.prototype.calllBind = function(...args) {
+  let printDetails = this;
+  const params = args.slice(1);
+  return function() {
+    printDetails.call(arg[0], params);
+  }
+}
+
+Function.prototype.applyBind = function(...args) {
+  let printDetails = this;
+  const params = args.slice(1);
+  return function(...args2) {
+    printDetails.apply(arg[0], [...params,...args2]);
+  }
+}
+
+
+const newBindFunction = somefunction.applybind(justObj);
+
+newBindFunction('hey', 'cool')
