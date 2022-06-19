@@ -10,7 +10,7 @@ function throtling(callback, delay) {
     const value = arguments;
     if (flag) {
       flag = false;
-      getItems.apply(context, arguments);
+      callback.apply(context, arguments);
     }
     setTimeout(() => {
       flag = true;
