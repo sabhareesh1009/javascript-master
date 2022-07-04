@@ -5,17 +5,18 @@ const array = [
   [35, 78, ["red"], [["dsa", 5, "rew"], 34, 78]],
 ];
 
-function flatArray(arr, d = 1) {
-  const flatArry = arr.filter((elm) => !Array.isArray(elm));
-  if (flatenArray.length) {
-  }
-}
-
-const findNumCount = (array) => {
-  let flatenArray = [];
-  for (let i = 0; i < array.length; i++) {
-    if (Array.isArray(array[i])) {
-      flatArray(array[i], flatenArray);
+function flatenArray(array) {
+	let output = [];
+  for(let i of array) {
+  	if (Array.isArray(i)) {
+    	const value = flatenArray(i);
+      output = [...output, ...value];
+    } else {
+    	output = [...output, i];
     }
   }
-};
+  return output
+} 
+
+const arr = [1, 2, [3, 4, [5, 6, [10,[4,6,[9,10],1, 4,[5,6]]]]],[3,[10,[11]]]];
+console.log(flatenArray(arr))
